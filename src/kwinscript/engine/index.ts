@@ -258,7 +258,6 @@ export class EngineImpl implements Engine {
     const stepSize = this.config.resizeStepSize / 100.0;
     const hStepSize = srf.workingArea.width * stepSize;
     const vStepSize = srf.workingArea.height * stepSize;
-    this.log.log(`stepSize: ${stepSize}`);
     let delta: RectDelta;
     switch (dir) {
       case "east":

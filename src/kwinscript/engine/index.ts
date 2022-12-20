@@ -254,7 +254,7 @@ export class EngineImpl implements Engine {
       }
     }
 
-    // TODO: configurable step size?
+    // resizeStepSize is stored as a number between 0.0-100.0
     const stepSize = this.config.resizeStepSize / 100.0;
     const hStepSize = srf.workingArea.width * stepSize;
     const vStepSize = srf.workingArea.height * stepSize;

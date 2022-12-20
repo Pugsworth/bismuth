@@ -68,6 +68,12 @@ Kirigami.FormLayout {
         settingName: "keepFloatAbove"
     }
 
+    BIC.PercentConfigSpinBox {
+        Kirigami.FormData.label: i18n("Window resize step amount:")
+        settingName: "resizeStepSize"
+        realStepSize: 0.5
+    }
+
     QQC2.ButtonGroup {
         id: windowSpawnPositionGroup
     }
@@ -155,19 +161,6 @@ Kirigami.FormLayout {
         onClicked: () => {
             return kcm.push("./views/WorkspaceRules.qml");
         }
-    }
-
-    // Item {
-    //     Kirigami.FormData.isSection: true
-    //     Kirigami.FormData.label: i18n("Test")
-    // }
-
-    BIC.PercentConfigSpinBox {
-        Kirigami.FormData.label: i18n("Size step amoun2t:")
-
-        settingName: "resizeStepSize"
-
-        realStepSize: 0.5
     }
 
 }

@@ -6,56 +6,43 @@ import QtQuick.Controls 2.12 as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.7 as Kirigami
 
-Item {
-    id: root
+QQC2.SpinBox {
+    id: spinbox
 
     property string settingName: ""
     property int decimals: 2
     property real realValue: 0.0
     property real realFrom: 0.0
     property real realTo: 100.0
-    property real realStepSize: 1.0
+    property real realStepSize: 0.1
+    property real factor: Math.pow(10, decimals)
 
-    QQC2.SpinBox {
-        id: spinbox
+    stepSize: realStepSize * factor
+    value: realValue * factor
+    from: realFrom * factor
+    to: realTo * factor
 
-        property real factor: Math.pow(10, root.decimals)
+    validator: DoubleValidator {
+        bottom: Math.min(from, to)
+        top: Math.max(from, to)
+    }
 
-        stepSize: root.realStepSize*factor
-        value: root.realValue*factor
+    implicitWidth: Kirigami.Units.gridUnit * 5
+    implicitHeight: Kirigami.Units.gridUnit * 1.75
 
-        from: root.realFrom*factor
-        to: root.realTo*factor
+    textFromValue: function(value, locale) {
+        return parseFloat(value*1.0/factor).toFixed(decimals);
+    }
 
-        validator: DoubleValidator {
-            bottom: Math.min(spinbox.from, spinbox.to)
-            top: Math.max(spinbox.from, spinbox.to)
-        }
+    valueFromText: function(text, locale) {
+        return Number.fromLocaleString(locale, text) * factor
+    }
 
-        implicitWidth: Kirigami.Units.gridUnit * 5
-        implicitHeight: Kirigami.Units.gridUnit * 1.75
+    Component.onCompleted: () => {
+        value = kcm.config[settingName] * factor
+    }
 
-        textFromValue: function(value, locale) {
-            return parseFloat(spinbox.value*1.0/spinbox.factor).toFixed(root.decimals);
-        }
-
-
-        // textFromValue: function(value, locale) {
-        //     return Number(value / 100).toLocaleString(locale, 'f', root.decimals)
-        // }
-
-        valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text) * 100
-        }
-
-        Component.onCompleted: () => {
-            value = kcm.config[settingName]
-        }
-
-        value: kcm.config[settingName]
-        onValueModified: () => {
-            kcm.config[settingName] = value
-        }
-
+    onValueModified: () => {
+        kcm.config[settingName] = value / factor
     }
 }

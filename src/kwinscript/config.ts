@@ -12,6 +12,8 @@ export interface Config {
   maximizeSoleTile: boolean;
   monocleMinimizeRest: boolean; // KWin-specific
   untileByDragging: boolean;
+  // TODO: Add a way to specify the inverse (number of steps)
+  resizeStepSize: number; // The percent of the width/height that a single resize step takes. 0.0-100.0
   //#endregion
 
   //#region Features
@@ -52,6 +54,4 @@ export interface Config {
   ignoreActivity: string[];
   ignoreScreen: number[];
   //#endregion
-
-  resizeStepSize: number;
 }

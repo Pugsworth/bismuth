@@ -128,7 +128,7 @@ Kirigami.FormLayout {
         // For some reason we cannot pass a custom property to
         // extraEnabledConditions, so we have to define it here.
         // It is also a reason why RatioConfigSpinBox uses
-        // QQC2.SpinBox instead of ConfigSPinBox component
+        // QQC2.SpinBox instead of ConfigSpinBox component
         KCM.SettingStateBinding {
             configObject: kcm.config
             settingName: "limitTileWidthRatio"
@@ -155,6 +155,19 @@ Kirigami.FormLayout {
         onClicked: () => {
             return kcm.push("./views/WorkspaceRules.qml");
         }
+    }
+
+    // Item {
+    //     Kirigami.FormData.isSection: true
+    //     Kirigami.FormData.label: i18n("Test")
+    // }
+
+    BIC.PercentConfigSpinBox {
+        Kirigami.FormData.label: i18n("Size step amoun2t:")
+
+        settingName: "resizeStepSize"
+
+        realStepSize: 0.5
     }
 
 }

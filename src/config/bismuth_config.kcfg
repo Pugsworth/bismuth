@@ -182,6 +182,15 @@
       <label>Enable Experimental Backend</label>
       <default>false</default>
     </entry>
+
+
+
+
+    <entry name="resizeStepSize" type="Double">
+      <label>Size step amoun3t</label>
+      <default>5.2</default>
+    </entry>
+
   </group>
 
   <group name="Plugins">

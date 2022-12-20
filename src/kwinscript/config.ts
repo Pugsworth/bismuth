@@ -52,4 +52,6 @@ export interface Config {
   ignoreActivity: string[];
   ignoreScreen: number[];
   //#endregion
+
+  resizeStepSize: number;
 }
